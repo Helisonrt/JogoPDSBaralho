@@ -40,7 +40,7 @@ public class Jogador extends Baralho {
     public boolean jogarCarta(Carta carta) {
         numCartasMao--;
         for (int i = 0; i < maoJogador.size(); i++) {
-            if ((maoJogador.get(i).getNumero().equals(carta.getNumero())) && (maoJogador.get(i).getNumero().equals(carta.getNumero()))) {
+            if ((maoJogador.get(i).getNumero().equals(carta.getNumero())) && (maoJogador.get(i).getnaipe().equals(carta.getnaipe()))) {
                 maoJogador.remove(i);
                 return true;
 
