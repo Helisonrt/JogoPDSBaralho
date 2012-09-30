@@ -43,14 +43,11 @@ public class Jogador extends Baralho {
             if ((maoJogador.get(i).getNumero().equals(carta.getNumero())) && (maoJogador.get(i).getnaipe().equals(carta.getnaipe()))) {
                 maoJogador.remove(i);
                 return true;
-
-            } else {
-                System.out.println("Carta nao encontrada na mao do jogador");
-                return false;
-            }
         }
-        return false;
+        
 
+    }
+        return false;
     }
 
     public String getNome() {

@@ -121,6 +121,11 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jButtonCartaP1.setText("Jogar Carta");
+        jButtonCartaP1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCartaP1ActionPerformed(evt);
+            }
+        });
 
         jButtonComprarP2.setText("Comprar");
         jButtonComprarP2.addActionListener(new java.awt.event.ActionListener() {
@@ -267,27 +272,13 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxP2ActionPerformed
 
     private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP2ActionPerformed
-        
+
         String x = (String) jComboBoxP2.getSelectedItem();
         String carta[] = x.split(" ");
-        
-        String numero = carta[0];
-        System.out.println("$$$"+carta[0]+"$$$$$");
-        System.out.println("$$$"+carta[1]+"$$$$$");
-        String naipe = carta[1];
-        
-        System.out.println(x);
-        Carta c = new Carta(naipe, numero);
-        System.out.println(c.getNumero()+ " "+ c.getnaipe());
+        Carta c = new Carta(carta[1], carta[0]);
         jTextFieldCartaNaMesaP2.setText(x);
-        if(jogador2.jogarCarta(c)){
-            System.out.println("Carta jogada");
-        }
+        jogador2.jogarCarta(c);
         this.atualizaComboboxJogador2();
-        System.out.println(jogador2.getNumCartasMao());
-        
-        
-        
     }//GEN-LAST:event_jButtonCartaP2ActionPerformed
 
     private void jTextFieldCartaNaMesaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCartaNaMesaP1ActionPerformed
@@ -310,6 +301,15 @@ public class JogoBurro extends javax.swing.JFrame {
         this.atualizaMonteCompra();
 
     }//GEN-LAST:event_jButtonComprarP1ActionPerformed
+
+    private void jButtonCartaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP1ActionPerformed
+        String x = (String) jComboBoxP1.getSelectedItem();
+        String carta[] = x.split(" ");
+        Carta c = new Carta(carta[1], carta[0]);
+        jTextFieldCartaNaMesaP1.setText(x);
+        jogador1.jogarCarta(c);
+        this.atualizaComboboxJogador1();
+    }//GEN-LAST:event_jButtonCartaP1ActionPerformed
 
     /**
      * @param args the command line arguments
