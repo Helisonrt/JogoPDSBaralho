@@ -3,28 +3,53 @@
  * and open the template in the editor.
  */
 package jogodeburro;
+
+import java.util.ArrayList;
 import pds.Carta;
+import pds.MonteDescarte;
+import pds.Baralho;
 
 /**
  *
  * @author Helison
  */
-public class Jogador {
-    
+public class Jogador extends Baralho{
+
     private String nome;
-    private int numCartasMao;
+    private int numCartasMao=0;
     private int numCartasCompradas;
-    MaoJogador mao = new MaoJogador();
+    ArrayList<Carta> maoJogador = new ArrayList<>();
     Carta carta;
-   
-    public Jogador(Baralho baralho){
-        for (int i =0; i<3;i++){
-        carta = baralho.getPrimeiraCarta();
-        mao.moverParaMonteDeDescarte(carta);
+    
+
+    public Jogador(Baralho baralho) {
+        
+        for (int i = 0; i <=3; i++) {
+            carta = baralho.getPrimeiraCarta();
+            maoJogador.add(carta);
         }
-        numCartasCompradas =0;
-        numCartasMao=3;
+        numCartasCompradas = 0;
+        numCartasMao = 4;
     }
+
+    public void comprarCarta(Baralho baralho){
+        numCartasCompradas++;
+        numCartasMao++;
+        maoJogador.add(baralho.getPrimeiraCarta());    
+    }
+    
+    public boolean jogarCarta(Carta carta){
+        numCartasMao--;
+        try{
+        return maoJogador.remove(carta);
+        
+        }
+        catch(Exception e){
+            System.out.println("Carta nao encontrada na mao do jogador");
+        }
+        return false;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -48,18 +73,7 @@ public class Jogador {
     public void setNumCartasCompradas(int numCartasCompradas) {
         this.numCartasCompradas = numCartasCompradas;
     }
-    
-       public boolean mesmoNaipe(Carta carta) {
-        if (mao.estaNoMonteDescarte(carta.getnaipe(),carta.getNumero())){
-            return true;
-        }
-           return false;
-    }
 
-    public boolean mesmoNumero(Carta carta) {
-        if (mao.estaNoMonteDescarte(carta.getnaipe(),carta.getNumero())){
-        return true;
-    }return false;
-    }
- 
+    
+    
 }
