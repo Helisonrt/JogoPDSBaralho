@@ -13,18 +13,17 @@ import pds.Baralho;
  *
  * @author Helison
  */
-public class Jogador extends Baralho{
+public class Jogador extends Baralho {
 
     private String nome;
-    private int numCartasMao=0;
+    private int numCartasMao = 0;
     private int numCartasCompradas;
     ArrayList<Carta> maoJogador = new ArrayList<>();
     Carta carta;
-    
 
     public Jogador(Baralho baralho) {
-        
-        for (int i = 0; i <=3; i++) {
+
+        for (int i = 0; i <= 3; i++) {
             carta = baralho.getPrimeiraCarta();
             maoJogador.add(carta);
         }
@@ -32,24 +31,28 @@ public class Jogador extends Baralho{
         numCartasMao = 4;
     }
 
-    public void comprarCarta(Baralho baralho){
+    public void comprarCarta(Baralho baralho) {
         numCartasCompradas++;
         numCartasMao++;
-        maoJogador.add(baralho.getPrimeiraCarta());    
+        maoJogador.add(baralho.getPrimeiraCarta());
     }
-    
-    public boolean jogarCarta(Carta carta){
+
+    public boolean jogarCarta(Carta carta) {
         numCartasMao--;
-        try{
-        return maoJogador.remove(carta);
-        
-        }
-        catch(Exception e){
-            System.out.println("Carta nao encontrada na mao do jogador");
+        for (int i = 0; i < maoJogador.size(); i++) {
+            if ((maoJogador.get(i).getNumero().equals(carta.getNumero())) && (maoJogador.get(i).getNumero().equals(carta.getNumero()))) {
+                maoJogador.remove(i);
+                return true;
+
+            } else {
+                System.out.println("Carta nao encontrada na mao do jogador");
+                return false;
+            }
         }
         return false;
+
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -73,7 +76,4 @@ public class Jogador extends Baralho{
     public void setNumCartasCompradas(int numCartasCompradas) {
         this.numCartasCompradas = numCartasCompradas;
     }
-
-    
-    
 }

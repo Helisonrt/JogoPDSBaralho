@@ -267,7 +267,27 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxP2ActionPerformed
 
     private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP2ActionPerformed
-        //jTextFieldCartaNaMesa
+        
+        String x = (String) jComboBoxP2.getSelectedItem();
+        String carta[] = x.split(" ");
+        
+        String numero = carta[0];
+        System.out.println("$$$"+carta[0]+"$$$$$");
+        System.out.println("$$$"+carta[1]+"$$$$$");
+        String naipe = carta[1];
+        
+        System.out.println(x);
+        Carta c = new Carta(naipe, numero);
+        System.out.println(c.getNumero()+ " "+ c.getnaipe());
+        jTextFieldCartaNaMesaP2.setText(x);
+        if(jogador2.jogarCarta(c)){
+            System.out.println("Carta jogada");
+        }
+        this.atualizaComboboxJogador2();
+        System.out.println(jogador2.getNumCartasMao());
+        
+        
+        
     }//GEN-LAST:event_jButtonCartaP2ActionPerformed
 
     private void jTextFieldCartaNaMesaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCartaNaMesaP1ActionPerformed
@@ -275,7 +295,7 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCartaNaMesaP1ActionPerformed
 
     private void jButtonComprarP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP2ActionPerformed
-        jogador2.maoJogador.add(baralho.getPrimeiraCarta());
+        jogador2.comprarCarta(baralho);
         this.atualizaComboboxJogador2();
         this.atualizaMonteCompra();
 
@@ -285,7 +305,7 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldMonteCompraActionPerformed
 
     private void jButtonComprarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP1ActionPerformed
-        jogador1.maoJogador.add(baralho.getPrimeiraCarta());
+        jogador1.comprarCarta(baralho);
         this.atualizaComboboxJogador1();
         this.atualizaMonteCompra();
 
