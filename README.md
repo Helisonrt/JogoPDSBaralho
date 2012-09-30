@@ -15,6 +15,6 @@ As cartas ficam na mesa.
 
 Caso um jogador nao tenha uma carta do mesmo naipe ou do mesmo numero ele deve comprar até conseguir uma carta que satisfaça essa condição.
 
-O jogo acaba quando não houver mais cartas no baralho de compra
+O jogo acaba quando não houver mais cartas no baralho de compra ou algum jogador ficar sem cartas.
 
-O ganhador eh o jogador que tiver comprado o menor numero de cartas do monte
+O ganhador eh o jogador que tiver comprado o menor numero de cartas ao final do jogo.
