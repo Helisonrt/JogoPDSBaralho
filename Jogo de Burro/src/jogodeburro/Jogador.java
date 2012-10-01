@@ -31,10 +31,15 @@ public class Jogador extends Baralho {
         numCartasMao = 4;
     }
 
-    public void comprarCarta(Baralho baralho) {
-        numCartasCompradas++;
-        numCartasMao++;
-        maoJogador.add(baralho.getPrimeiraCarta());
+    public boolean comprarCarta(Baralho baralho) {
+        if (baralho.getBaralhoCompleto().size() > 0) {
+            numCartasCompradas++;
+            numCartasMao++;
+            maoJogador.add(baralho.getPrimeiraCarta());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean jogarCarta(Carta carta) {
@@ -43,10 +48,10 @@ public class Jogador extends Baralho {
             if ((maoJogador.get(i).getNumero().equals(carta.getNumero())) && (maoJogador.get(i).getnaipe().equals(carta.getnaipe()))) {
                 maoJogador.remove(i);
                 return true;
-        }
-        
+            }
 
-    }
+
+        }
         return false;
     }
 

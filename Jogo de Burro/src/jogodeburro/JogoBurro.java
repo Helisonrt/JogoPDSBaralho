@@ -29,7 +29,7 @@ public class JogoBurro extends javax.swing.JFrame {
      */
     public JogoBurro() {
         initComponents();
-        
+
     }
 
     private String[] carregarCartasMaoJogador1() {
@@ -314,20 +314,27 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxP2ActionPerformed
 
     private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP2ActionPerformed
-        if(jogador2.getNumCartasMao()==0){
-            JOptionPane.showMessageDialog(rootPane,jogador2.getNome()+ " Você Ganhou!");
-        }
-        else{
         String x = (String) jComboBoxP2.getSelectedItem();
-        String carta[] = x.split(" ");
-        Carta c = new Carta(carta[1], carta[0]);
-        jTextFieldCartaNaMesaP2.setText(x);
-        jogador2.jogarCarta(c);
-        this.atualizaComboboxJogador2();
-        jButtonCartaP1.setEnabled(true);
-        jButtonComprarP1.setEnabled(true);
-        jButtonCartaP2.setEnabled(false);
-        jButtonComprarP2.setEnabled(false);
+        String arrayCarta[] = x.split(" ");
+        Carta carta1 = new Carta(arrayCarta[1], arrayCarta[0]);
+        //carta jogada pelo jogador 2
+        String x2 = (String) jTextFieldCartaNaMesaP1.getText();
+        String arrayCarta2[] = x2.split(" ");
+        Carta carta2 = new Carta(arrayCarta2[1], arrayCarta2[0]);
+
+        if (jogador2.getNumCartasMao() == 0) {
+            JOptionPane.showMessageDialog(rootPane, jogo.verificaVencedor(jogador1, jogador2) + " Você Ganhou!");
+        } else if (jogo.mesmoNaipe(carta1, carta2) || jogo.mesmoNumero(carta1, carta2)) {
+
+            jTextFieldCartaNaMesaP2.setText(x);
+            jogador2.jogarCarta(carta1);
+            this.atualizaComboboxJogador2();
+            jButtonCartaP1.setEnabled(true);
+            jButtonComprarP1.setEnabled(true);
+            jButtonCartaP2.setEnabled(false);
+            jButtonComprarP2.setEnabled(false);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Escolhe outra carta para jogar, ou compre uma carta");
         }
     }//GEN-LAST:event_jButtonCartaP2ActionPerformed
 
@@ -336,9 +343,17 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldCartaNaMesaP1ActionPerformed
 
     private void jButtonComprarP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP2ActionPerformed
-        jogador2.comprarCarta(baralho);
-        this.atualizaComboboxJogador2();
-        this.atualizaMonteCompra();
+        if (jogador2.comprarCarta(baralho)) {
+            this.atualizaComboboxJogador2();
+            this.atualizaMonteCompra();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, jogo.verificaVencedor(jogador1, jogador2) + " Você Ganhou!");
+            jButtonComprarP1.setEnabled(false);
+            jButtonCartaP1.setEnabled(false);
+            jButtonCartaP1.setEnabled(false);
+            jButtonCartaP2.setEnabled(false);
+            
+        }
 
     }//GEN-LAST:event_jButtonComprarP2ActionPerformed
 
@@ -346,33 +361,59 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldMonteCompraActionPerformed
 
     private void jButtonComprarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP1ActionPerformed
-        jogador1.comprarCarta(baralho);
-        this.atualizaComboboxJogador1();
-        this.atualizaMonteCompra();
+        if (jogador1.comprarCarta(baralho)) {
+            this.atualizaComboboxJogador1();
+            this.atualizaMonteCompra();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, jogo.verificaVencedor(jogador1, jogador2) + " Você Ganhou!");
+            jButtonComprarP1.setEnabled(false);
+            jButtonCartaP1.setEnabled(false);
+            jButtonCartaP1.setEnabled(false);
+            jButtonCartaP2.setEnabled(false);
+        }
+
 
     }//GEN-LAST:event_jButtonComprarP1ActionPerformed
 
     private void jButtonCartaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP1ActionPerformed
-        if(jogador1.getNumCartasMao()==0){
-            JOptionPane.showMessageDialog(rootPane, jogador1.getNome()+ "Você Ganhou!");
-        }
-        else{
+        //carta a ser jogada pelo jogador 1
         String x = (String) jComboBoxP1.getSelectedItem();
-        String carta[] = x.split(" ");
-        Carta c = new Carta(carta[1], carta[0]);
-        jTextFieldCartaNaMesaP1.setText(x);
-        jogador1.jogarCarta(c);
-        this.atualizaComboboxJogador1();
-        jButtonCartaP1.setEnabled(false);
-        jButtonComprarP1.setEnabled(false);
-        jButtonCartaP2.setEnabled(true);
-        jButtonComprarP2.setEnabled(true);
-       }
+        String arrayCarta[] = x.split(" ");
+        Carta carta1 = new Carta(arrayCarta[1], arrayCarta[0]);
+        //carta jogada pelo jogador 2
+        String x2 = (String) jTextFieldCartaNaMesaP2.getText();
+        String arrayCarta2[] = x2.split(" ");
+        Carta carta2 = new Carta(arrayCarta2[1], arrayCarta2[0]);
+
+        if (jTextFieldCartaNaMesaP2.getText().equals("Carta P2")) {
+            jTextFieldCartaNaMesaP1.setText(x);
+            jogador1.jogarCarta(carta1);
+            this.atualizaComboboxJogador1();
+            jButtonCartaP1.setEnabled(false);
+            jButtonComprarP1.setEnabled(false);
+            jButtonCartaP2.setEnabled(true);
+            jButtonComprarP2.setEnabled(true);
+        } //verificação se o jogador 1 ainda possui cartas para jogar
+        else if (jogador1.getNumCartasMao() == 0) {
+            JOptionPane.showMessageDialog(rootPane, jogo.verificaVencedor(jogador1, jogador2) + "Você Ganhou!");
+        } // verificação se a carta eh do mesmo naipe ou do mesmo numero
+        else if (jogo.mesmoNaipe(carta1, carta2) || jogo.mesmoNumero(carta1, carta2)) {
+
+            jTextFieldCartaNaMesaP1.setText(x);
+            jogador1.jogarCarta(carta1);
+            this.atualizaComboboxJogador1();
+            jButtonCartaP1.setEnabled(false);
+            jButtonComprarP1.setEnabled(false);
+            jButtonCartaP2.setEnabled(true);
+            jButtonComprarP2.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Escolhe outra carta para jogar, ou compre uma carta");
+        }
     }//GEN-LAST:event_jButtonCartaP1ActionPerformed
 
     private void jButtonIniciarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarJogoActionPerformed
-        
-        
+
+
         baralho = new Baralho();
         baralho.embaralhar();
         jogador1 = new Jogador(baralho);
@@ -380,7 +421,7 @@ public class JogoBurro extends javax.swing.JFrame {
         jogo = new JogoDeBurro(jogador1, jogador2, baralho);
         model1 = new DefaultComboBoxModel(carregarCartasMaoJogador1());
         model2 = new DefaultComboBoxModel(carregarCartasMaoJogador2());
-        
+
         jogador1.setNome(jTextFieldNomeP1.getText());
         jogador2.setNome(jTextFieldNomeP2.getText());
         jLabelNomeP1.setText(jTextFieldNomeP1.getText());
@@ -392,7 +433,7 @@ public class JogoBurro extends javax.swing.JFrame {
         jComboBoxP2.setEnabled(true);
         jButtonCartaP1.setEnabled(true);
         jButtonComprarP1.setEnabled(true);
-        
+
     }//GEN-LAST:event_jButtonIniciarJogoActionPerformed
 
     /**
