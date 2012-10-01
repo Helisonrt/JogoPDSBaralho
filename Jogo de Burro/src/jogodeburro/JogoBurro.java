@@ -105,6 +105,8 @@ public class JogoBurro extends javax.swing.JFrame {
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Jogo de Burro");
+        setResizable(false);
 
         jButtonCartaP2.setText("Jogar Carta");
         jButtonCartaP2.setEnabled(false);
