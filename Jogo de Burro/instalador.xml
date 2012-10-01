@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes"?>
+<installation version="1.0">
+    <info>
+        <appname>Jogo de Burro</appname>
+        <appversion>1.0</appversion>
+        <appsubpath>JogoDeBurro</appsubpath>
+        <authors>
+            <author email="helisonreus@gmail.com" name="Helison Reus Teixeira"/>
+        </authors>
+        <uninstaller name="Uninstaller.jar" write="yes"/>
+        <requiresjdk>no</requiresjdk>
+        <writeinstallationinformation>no</writeinstallationinformation>
+        <pack200/>
+        <run-privileged condition="izpack.windowsinstall.vista|izpack.windowsinstall.7"/>
+    </info>
+    <guiprefs height="480" resizable="yes" width="640">
+        <laf name="substance">
+            <param name="variant" value="business-blue"/>
+            <os family="windows"/>
+            <os family="unix"/>
+            <os family="mac"/>
+        </laf>
+        <modifier key="useFlags" value="yes"/>
+        <modifier key="langDisplayType" value="default"/>
+    </guiprefs>
+    <locale>
+        <langpack iso3="por"/>
+    </locale>
+    <resources>
+        <res id="InfoPanel.info" parse="yes" src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\README.md"/>
+        <res id="LicencePanel.licence" parse="yes" src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\gpl.txt"/>
+        <res id="shortcutSpec.xml" src="instalador_shortcutSpec.xml"/>
+        <res id="Unix_shortcutSpec.xml" src="instalador_Unix_shortcutSpec.xml"/>
+        <res id="installer.langsel.img" src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\donkey.gif"/>
+    </resources>
+    <panels>
+        <panel classname="CheckedHelloPanel"/>
+        <panel classname="InfoPanel"/>
+        <panel classname="LicencePanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="TargetPanel"/>
+        <panel classname="InstallPanel"/>
+        <panel classname="ShortcutPanel"/>
+        <panel classname="SimpleFinishPanel"/>
+    </panels>
+    <variables>
+        <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
+    </variables>
+    <packs>
+        <pack name="JogoDeBurro" preselected="yes" required="yes">
+            <description/>
+            <file override="update"
+                src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\dist\Jogo_de_Burro.jar" targetdir="$INSTALL_PATH/"/>
+        </pack>
+        <pack name="API Cartas" preselected="yes" required="yes">
+            <description/>
+            <file override="update"
+                src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\dist\lib\Baralho.jar" targetdir="$INSTALL_PATH/lib/"/>
+        </pack>
+    </packs>
+    <native name="ShellLink.dll" type="izpack"/>
+    <native name="ShellLink_x64.dll" type="izpack"/>
+</installation>

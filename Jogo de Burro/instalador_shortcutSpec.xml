@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<shortcuts>
+    <skipIfNotSupported/>
+    <defaultCurrentUser/>
+    <programGroup defaultName="Jogo De Burro" location="applications"/>
+    <shortcut applications="no" desktop="yes" initialState="noShow"
+        name="Jogo de Burro" programGroup="yes" startMenu="no"
+        startup="no" target="$INSTALL_PATH/JogoDeBurro.jar"/>
+</shortcuts>
