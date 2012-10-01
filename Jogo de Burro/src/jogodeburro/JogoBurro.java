@@ -121,6 +121,7 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jButtonCartaP1.setText("Jogar Carta");
+
         jButtonCartaP1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCartaP1ActionPerformed(evt);
@@ -151,18 +152,9 @@ public class JogoBurro extends javax.swing.JFrame {
         jTextFieldMonteCompra.setText("Monte de Compra");
         jTextFieldMonteCompra.setToolTipText("Monte de Compra");
         jTextFieldMonteCompra.setEnabled(false);
-        jTextFieldMonteCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldMonteCompraActionPerformed(evt);
-            }
-        });
-
+ 
         jComboBoxP2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxP2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxP2ActionPerformed(evt);
-            }
-        });
+
 
         jComboBoxP1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -183,11 +175,6 @@ public class JogoBurro extends javax.swing.JFrame {
         jTextFieldCartaNaMesaP1.setText("Carta P1");
         jTextFieldCartaNaMesaP1.setToolTipText("Carta Jogada pelo Jogador 1");
         jTextFieldCartaNaMesaP1.setName(""); // NOI18N
-        jTextFieldCartaNaMesaP1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCartaNaMesaP1ActionPerformed(evt);
-            }
-        });
 
         jTextFieldCartaNaMesaP2.setEditable(false);
         jTextFieldCartaNaMesaP2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -267,49 +254,41 @@ public class JogoBurro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxP2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxP2ActionPerformed
-
-    private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP2ActionPerformed
-
+    
+    private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {
         String x = (String) jComboBoxP2.getSelectedItem();
         String carta[] = x.split(" ");
         Carta c = new Carta(carta[1], carta[0]);
         jTextFieldCartaNaMesaP2.setText(x);
         jogador2.jogarCarta(c);
         this.atualizaComboboxJogador2();
-    }//GEN-LAST:event_jButtonCartaP2ActionPerformed
+    }
 
-    private void jTextFieldCartaNaMesaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCartaNaMesaP1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldCartaNaMesaP1ActionPerformed
 
-    private void jButtonComprarP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP2ActionPerformed
+    private void jButtonComprarP2ActionPerformed(java.awt.event.ActionEvent evt) {
         jogador2.comprarCarta(baralho);
         this.atualizaComboboxJogador2();
         this.atualizaMonteCompra();
 
-    }//GEN-LAST:event_jButtonComprarP2ActionPerformed
+    }
 
-    private void jTextFieldMonteCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMonteCompraActionPerformed
-    }//GEN-LAST:event_jTextFieldMonteCompraActionPerformed
 
-    private void jButtonComprarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP1ActionPerformed
+    private void jButtonComprarP1ActionPerformed(java.awt.event.ActionEvent evt) {
         jogador1.comprarCarta(baralho);
         this.atualizaComboboxJogador1();
         this.atualizaMonteCompra();
 
-    }//GEN-LAST:event_jButtonComprarP1ActionPerformed
+    }
 
-    private void jButtonCartaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP1ActionPerformed
+    private void jButtonCartaP1ActionPerformed(java.awt.event.ActionEvent evt) {
         String x = (String) jComboBoxP1.getSelectedItem();
         String carta[] = x.split(" ");
         Carta c = new Carta(carta[1], carta[0]);
         jTextFieldCartaNaMesaP1.setText(x);
         jogador1.jogarCarta(c);
         this.atualizaComboboxJogador1();
-    }//GEN-LAST:event_jButtonCartaP1ActionPerformed
+    }
+
 
     /**
      * @param args the command line arguments

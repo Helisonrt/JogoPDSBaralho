@@ -128,6 +128,7 @@
         <Property name="text" type="java.lang.String" value="Jogar Carta"/>
       </Properties>
       <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jButtonCartaP1StateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCartaP1ActionPerformed"/>
       </Events>
     </Component>
