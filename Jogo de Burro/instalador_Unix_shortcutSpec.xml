@@ -2,7 +2,7 @@
 <shortcuts>
     <skipIfNotSupported/>
     <defaultCurrentUser/>
-    <programGroup defaultName="Jogo De Burro" location="applications"/>
+    <programGroup defaultName="JogoDeBurro" location="applications"/>
     <shortcut KdeUsername="root" applications="no" desktop="yes"
         encoding="UTF-8" initialState="normal"
         name="Jogo De Burro" programGroup="yes" startMenu="no"

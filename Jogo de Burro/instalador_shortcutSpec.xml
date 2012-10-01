@@ -2,7 +2,7 @@
 <shortcuts>
     <skipIfNotSupported/>
     <defaultCurrentUser/>
-    <programGroup defaultName="Jogo De Burro" location="applications"/>
+    <programGroup defaultName="JogoDeBurro" location="applications"/>
     <shortcut applications="no" desktop="yes" initialState="noShow"
         name="Jogo de Burro" programGroup="yes" startMenu="no"
         startup="no" target="$INSTALL_PATH/JogoDeBurro.jar"/>

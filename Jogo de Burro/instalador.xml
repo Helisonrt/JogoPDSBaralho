@@ -50,7 +50,7 @@
         <pack name="JogoDeBurro" preselected="yes" required="yes">
             <description/>
             <file override="update"
-                src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\dist\Jogo_de_Burro.jar" targetdir="$INSTALL_PATH/"/>
+                src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\dist\JogodeBurro.jar" targetdir="$INSTALL_PATH/"/>
         </pack>
         <pack name="API Cartas" preselected="yes" required="yes">
             <description/>
