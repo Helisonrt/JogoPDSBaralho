@@ -6,8 +6,10 @@ package jogodeburro;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import pds.Baralho;
 import pds.Carta;
+import sun.misc.Cleaner;
 
 /**
  *
@@ -26,21 +28,8 @@ public class JogoBurro extends javax.swing.JFrame {
      * Creates new form JogoBurro
      */
     public JogoBurro() {
-
-
-
         initComponents();
-        baralho = new Baralho();
-        baralho.embaralhar();
-        jogador1 = new Jogador(baralho);
-        jogador2 = new Jogador(baralho);
-        jogo = new JogoDeBurro(jogador1, jogador2, baralho);
-        model1 = new DefaultComboBoxModel(carregarCartasMaoJogador1());
-        model2 = new DefaultComboBoxModel(carregarCartasMaoJogador2());
-
-        this.atualizaComboboxJogador1();
-        this.atualizaComboboxJogador2();
-        this.atualizaMonteCompra();
+        
     }
 
     private String[] carregarCartasMaoJogador1() {
@@ -97,8 +86,8 @@ public class JogoBurro extends javax.swing.JFrame {
         jButtonCartaP1 = new javax.swing.JButton();
         jButtonComprarP2 = new javax.swing.JButton();
         jButtonComprarP1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelNomeP2 = new javax.swing.JLabel();
+        jLabelNomeP1 = new javax.swing.JLabel();
         jTextFieldMonteCompra = new javax.swing.JTextField();
         jComboBoxP2 = new javax.swing.JComboBox();
         jComboBoxP1 = new javax.swing.JComboBox();
@@ -108,12 +97,18 @@ public class JogoBurro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextFieldCartaNaMesaP1 = new javax.swing.JTextField();
         jTextFieldCartaNaMesaP2 = new javax.swing.JTextField();
+        jButtonIniciarJogo = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldNomeP1 = new javax.swing.JTextField();
+        jTextFieldNomeP2 = new javax.swing.JTextField();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonCartaP2.setText("Jogar Carta");
+        jButtonCartaP2.setEnabled(false);
         jButtonCartaP2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCartaP2ActionPerformed(evt);
@@ -121,6 +116,7 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jButtonCartaP1.setText("Jogar Carta");
+        jButtonCartaP1.setEnabled(false);
         jButtonCartaP1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCartaP1ActionPerformed(evt);
@@ -128,6 +124,7 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jButtonComprarP2.setText("Comprar");
+        jButtonComprarP2.setEnabled(false);
         jButtonComprarP2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonComprarP2ActionPerformed(evt);
@@ -135,17 +132,18 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jButtonComprarP1.setText("Comprar");
+        jButtonComprarP1.setEnabled(false);
         jButtonComprarP1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonComprarP1ActionPerformed(evt);
             }
         });
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Jogador 2");
+        jLabelNomeP2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNomeP2.setText("Jogador 2");
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Jogador 1");
+        jLabelNomeP1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNomeP1.setText("Jogador 1");
 
         jTextFieldMonteCompra.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextFieldMonteCompra.setText("Monte de Compra");
@@ -158,6 +156,7 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jComboBoxP2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxP2.setEnabled(false);
         jComboBoxP2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxP2ActionPerformed(evt);
@@ -165,6 +164,7 @@ public class JogoBurro extends javax.swing.JFrame {
         });
 
         jComboBoxP1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxP1.setEnabled(false);
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Cartas Jogador 2");
@@ -194,50 +194,82 @@ public class JogoBurro extends javax.swing.JFrame {
         jTextFieldCartaNaMesaP2.setText("Carta P2");
         jTextFieldCartaNaMesaP2.setToolTipText("Carta Jogada pelo Jogador 2");
 
+        jButtonIniciarJogo.setText("Iniciar Jogo");
+        jButtonIniciarJogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIniciarJogoActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Nome Jogador 1");
+
+        jLabel8.setText("Nome Jogador 2");
+
+        jTextFieldNomeP1.setText("Jogador 1");
+
+        jTextFieldNomeP2.setText("Jogador 2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldNomeP1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextFieldNomeP2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addComponent(jButtonIniciarJogo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButtonCartaP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButtonComprarP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxP1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldMonteCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldCartaNaMesaP1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextFieldCartaNaMesaP2))))
-                        .addGap(7, 7, 7))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButtonComprarP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonCartaP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBoxP2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jButtonCartaP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButtonComprarP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jComboBoxP1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldMonteCompra)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextFieldCartaNaMesaP1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jTextFieldCartaNaMesaP2))))
+                                .addGap(7, 7, 7))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNomeP1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButtonComprarP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonCartaP2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBoxP2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelNomeP2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
+                .addComponent(jButtonIniciarJogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelNomeP2)
+                    .addComponent(jLabelNomeP1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -262,6 +294,16 @@ public class JogoBurro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextFieldMonteCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextFieldNomeP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextFieldNomeP2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -272,13 +314,21 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxP2ActionPerformed
 
     private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP2ActionPerformed
-
+        if(jogador2.getNumCartasMao()==0){
+            JOptionPane.showMessageDialog(rootPane,jogador2.getNome()+ " Você Ganhou!");
+        }
+        else{
         String x = (String) jComboBoxP2.getSelectedItem();
         String carta[] = x.split(" ");
         Carta c = new Carta(carta[1], carta[0]);
         jTextFieldCartaNaMesaP2.setText(x);
         jogador2.jogarCarta(c);
         this.atualizaComboboxJogador2();
+        jButtonCartaP1.setEnabled(true);
+        jButtonComprarP1.setEnabled(true);
+        jButtonCartaP2.setEnabled(false);
+        jButtonComprarP2.setEnabled(false);
+        }
     }//GEN-LAST:event_jButtonCartaP2ActionPerformed
 
     private void jTextFieldCartaNaMesaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCartaNaMesaP1ActionPerformed
@@ -303,13 +353,47 @@ public class JogoBurro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonComprarP1ActionPerformed
 
     private void jButtonCartaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP1ActionPerformed
+        if(jogador1.getNumCartasMao()==0){
+            JOptionPane.showMessageDialog(rootPane, jogador1.getNome()+ "Você Ganhou!");
+        }
+        else{
         String x = (String) jComboBoxP1.getSelectedItem();
         String carta[] = x.split(" ");
         Carta c = new Carta(carta[1], carta[0]);
         jTextFieldCartaNaMesaP1.setText(x);
         jogador1.jogarCarta(c);
         this.atualizaComboboxJogador1();
+        jButtonCartaP1.setEnabled(false);
+        jButtonComprarP1.setEnabled(false);
+        jButtonCartaP2.setEnabled(true);
+        jButtonComprarP2.setEnabled(true);
+       }
     }//GEN-LAST:event_jButtonCartaP1ActionPerformed
+
+    private void jButtonIniciarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarJogoActionPerformed
+        
+        
+        baralho = new Baralho();
+        baralho.embaralhar();
+        jogador1 = new Jogador(baralho);
+        jogador2 = new Jogador(baralho);
+        jogo = new JogoDeBurro(jogador1, jogador2, baralho);
+        model1 = new DefaultComboBoxModel(carregarCartasMaoJogador1());
+        model2 = new DefaultComboBoxModel(carregarCartasMaoJogador2());
+        
+        jogador1.setNome(jTextFieldNomeP1.getText());
+        jogador2.setNome(jTextFieldNomeP2.getText());
+        jLabelNomeP1.setText(jTextFieldNomeP1.getText());
+        jLabelNomeP2.setText(jTextFieldNomeP2.getText());
+        this.atualizaComboboxJogador1();
+        this.atualizaComboboxJogador2();
+        this.atualizaMonteCompra();
+        jComboBoxP1.setEnabled(true);
+        jComboBoxP2.setEnabled(true);
+        jButtonCartaP1.setEnabled(true);
+        jButtonComprarP1.setEnabled(true);
+        
+    }//GEN-LAST:event_jButtonIniciarJogoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,17 +434,22 @@ public class JogoBurro extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCartaP2;
     private javax.swing.JButton jButtonComprarP1;
     private javax.swing.JButton jButtonComprarP2;
+    private javax.swing.JButton jButtonIniciarJogo;
     private javax.swing.JComboBox jComboBoxP1;
     private javax.swing.JComboBox jComboBoxP2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelNomeP1;
+    private javax.swing.JLabel jLabelNomeP2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldCartaNaMesaP1;
     private javax.swing.JTextField jTextFieldCartaNaMesaP2;
     private javax.swing.JTextField jTextFieldMonteCompra;
+    private javax.swing.JTextField jTextFieldNomeP1;
+    private javax.swing.JTextField jTextFieldNomeP2;
     // End of variables declaration//GEN-END:variables
 }
