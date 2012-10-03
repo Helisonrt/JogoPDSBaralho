@@ -1,25 +1,8 @@
 Compilando o instalador
 
-Existem 2 formas de compilar o instalador: Através da linha de comando ou utilizando o Ant.
+OBS: Ãˆ necessÃ¡rio que a construÃ§Ã£o do sistema jÃ¡ tenha sido efetuada, para saber como leia o arquivo README CONSTRUCAO
 
-Para compilar o instalador através da linha de comando
-Abra uma janela DOS;
-Vá até o diretório onde está o seu projeto, na raíz. No nosso caso Produto;
-Certifique-se que o diretório bin do IzPack está no path de execução de seu sistema;
-Digite compile install.xml -b . -o install.jar -k standard.
-Para incluir a criação do instalador no arquivo build.xml do seu projeto
-Defina a anttask como abaixo
-<taskdef name="izpack" classpath="${izpack.dir}/lib/compiler.jar"
-classname="com.izforge.izpack.ant.IzPackTask"/>
-Crie a task como no modelo
-<izpack input="extras/installer.xml"
-output="dist/install/produto-install.jar"
-installerType="standard" basedir="${basedir}"
-izPackDir="${izpack.dir}/"/>
-A property ${izpack.dir} deve apontar para o diretório de instalação do IzPack.
+Passo para compilar o instalador:
 
-Agora é só empacotar tudo e enviar para o cliente.
-
-
-
-Read more: http://javafree.uol.com.br/artigo/871465/Criando-Instaladores-com-IzPack.html#ixzz27thEBdsy
+1)Abra o terminal e vÃ¡ atÃ© o diretÃ³rio onde o arquivo instalador.xml se encontra
+2)Digite o comando compile instalador.xml
