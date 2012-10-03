@@ -49,7 +49,7 @@
         <pack name="JogoDeBurro" preselected="yes" required="yes">
             <description/>
             <file override="update"
-                src="\dist\JogodeBurro.jar" targetdir="$INSTALL_PATH/"/>
+                src="\build\JogodeBurro.jar" targetdir="$INSTALL_PATH/"/>
         </pack>
         <pack name="API Cartas" preselected="yes" required="yes">
             <description/>

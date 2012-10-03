@@ -1,30 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="create_run_jar" name="Create Runnable Jar for Project JogoDeBurro">
+
+
 	<property name="src.dir" value="src"/>
 	<property name="build.dir" value="build"/>
 	<property name="bin.dir" value="bin"/>
+	<property name ="lib.dir" value = "lib"/>
+	
+	<path id="classpath">
+		<fileset dir ="${src.dir}/lib" includes="**/*.jar"/>
+	</path>
 
 	<target name="init">
+		<delete dir ="${build.dir}"/>
+		<delete dir ="${bin.dir}"/>
 		<mkdir dir="${build.dir}"/>
 		<mkdir dir="${bin.dir}"/>
 	</target>
 	<target name="compile" depends="init" description="Compila os fontes">
-		<javac srcdir="${src.dir}" destdir="${bin.dir}">
+		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref ="classpath">
 		<classpath>
-			<pathelement location="${build.dir}" />
+			<pathelement location="${bin.dir}" />
 		</classpath>
 		</javac>
 	</target>
 	
 	
     <target name="create_run_jar" depends="compile">
-        <jar destfile="${build.dir}/JogoDeBurro.jar" filesetmanifest="mergewithoutmain">
+        <jar destfile="${build.dir}/JogoDeBurro.jar">
             <manifest>
                 <attribute name="Main-Class" value="jogodeburro.JogoBurro"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${bin.dir}"/>
-            <zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/apicartas.jar"/>
+			<zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/apicartas.jar"/>
+            
         </jar>
     </target>
 </project>
