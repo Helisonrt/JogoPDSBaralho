@@ -27,11 +27,11 @@
         <langpack iso3="por"/>
     </locale>
     <resources>
-        <res id="InfoPanel.info" parse="yes" src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\README.md"/>
-        <res id="LicencePanel.licence" parse="yes" src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\gpl.txt"/>
+        <res id="InfoPanel.info" parse="yes" src="README.md"/>
+        <res id="LicencePanel.licence" parse="yes" src="gpl.txt"/>
         <res id="shortcutSpec.xml" src="instalador_shortcutSpec.xml"/>
         <res id="Unix_shortcutSpec.xml" src="instalador_Unix_shortcutSpec.xml"/>
-        <res id="installer.langsel.img" src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\donkey.gif"/>
+        <res id="installer.langsel.img" src="donkey.gif"/>
     </resources>
     <panels>
         <panel classname="CheckedHelloPanel"/>
@@ -50,12 +50,10 @@
         <pack name="JogoDeBurro" preselected="yes" required="yes">
             <description/>
             <file override="update"
-                src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\dist\JogodeBurro.jar" targetdir="$INSTALL_PATH/"/>
+                src="\dist\JogodeBurro.jar" targetdir="$INSTALL_PATH/"/>
         </pack>
         <pack name="API Cartas" preselected="yes" required="yes">
             <description/>
-            <file override="update"
-                src="D:\Documentos\NetBeansProjects\JogoPDSBaralho\Jogo de Burro\dist\lib\Baralho.jar" targetdir="$INSTALL_PATH/lib/"/>
         </pack>
     </packs>
     <native name="ShellLink.dll" type="izpack"/>
