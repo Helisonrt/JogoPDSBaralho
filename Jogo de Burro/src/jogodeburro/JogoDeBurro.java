@@ -4,7 +4,7 @@
  */
 package jogodeburro;
 
-import pds.*;
+import lib.*;
 
 /**
  *

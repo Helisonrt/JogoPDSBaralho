@@ -3,7 +3,7 @@ package jogodeburro;
 import java.util.ArrayList;
 import pds.Carta;
 import pds.MonteDescarte;
-import pds.Baralho;
+import lib.*;
 
 /**
  * Classe que representa um jogador com suas principais funcionalidades

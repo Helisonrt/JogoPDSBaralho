@@ -33,8 +33,7 @@
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${bin.dir}"/>
-			<zipfileset excludes="META-INF/*.SF" src="${src.dir}/lib/apicartas.jar"/>
-            
+         
         </jar>
     </target>
 </project>
