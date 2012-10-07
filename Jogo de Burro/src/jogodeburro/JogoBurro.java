@@ -24,13 +24,17 @@ public class JogoBurro extends javax.swing.JFrame {
     DefaultComboBoxModel model2;
 
     /**
-     * Creates new form JogoBurro
+     * Construtor do Jogo de Burro
      */
     public JogoBurro() {
         initComponents();
 
     }
 
+    /**
+     * Metodo que retorna um arraylist contendo as cartas na mao do jogador 1
+     * @return
+     */
     private String[] carregarCartasMaoJogador1() {
         String[] maoJogador1 = new String[jogador1.maoJogador.size()];
         for (int i = 0; i < jogador1.maoJogador.size(); i++) {
@@ -40,7 +44,10 @@ public class JogoBurro extends javax.swing.JFrame {
         return maoJogador1;
 
     }
-
+    /**
+     * Metodo que retorna um arraylist contendo as cartas na mao do jogador 2
+     * @return
+     */
     private String[] carregarCartasMaoJogador2() {
         String[] maoJogador1 = new String[jogador2.maoJogador.size()];
         for (int i = 0; i < jogador2.maoJogador.size(); i++) {
@@ -50,6 +57,9 @@ public class JogoBurro extends javax.swing.JFrame {
         return maoJogador1;
 
     }
+    /**
+     * Metodo que atualiza os dados do combobox do jogador1
+     */
 
     private void atualizaComboboxJogador1() {
         model1 = new DefaultComboBoxModel(carregarCartasMaoJogador1());
@@ -57,13 +67,18 @@ public class JogoBurro extends javax.swing.JFrame {
         jComboBoxP1.setModel(model1);
         //jComboBoxP2.setModel(new javax.swing.DefaultComboBoxModel(this.carregarCartasMaoJogador1()));
     }
-
+    /**
+     * Metodo que atualiza os dados do combobox do jogador2
+     */
     private void atualizaComboboxJogador2() {
         model2 = new DefaultComboBoxModel(carregarCartasMaoJogador2());
         jComboBoxP2.removeAllItems();
         jComboBoxP2.setModel(model2);
 
     }
+    /**
+     * Metodo que atualizar o monte de compra
+     */
 
     private void atualizaMonteCompra() {
         Carta primeiraCarta = baralho.getBaralhoCompleto().get(0);
@@ -306,7 +321,10 @@ public class JogoBurro extends javax.swing.JFrame {
     private void jComboBoxP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxP2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxP2ActionPerformed
-
+    /**
+     * Metodo responsavel por fazer o jogador 2 jogar uma carta na mesa
+     * @param evt
+     */
     private void jButtonCartaP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP2ActionPerformed
         String x = (String) jComboBoxP2.getSelectedItem();
         String arrayCarta[] = x.split(" ");
@@ -335,13 +353,17 @@ public class JogoBurro extends javax.swing.JFrame {
     private void jTextFieldCartaNaMesaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCartaNaMesaP1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldCartaNaMesaP1ActionPerformed
-
+    /**
+     * Metodo responsavel por fazer o jogador 2 comprar uma carta
+     * @param evt
+     */
     private void jButtonComprarP2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP2ActionPerformed
         if (jogador2.comprarCarta(baralho)) {
             this.atualizaComboboxJogador2();
             this.atualizaMonteCompra();
         } else {
             JOptionPane.showMessageDialog(rootPane, jogo.verificaVencedor(jogador1, jogador2) + " Você Ganhou!");
+            jButtonComprarP2.setEnabled(false);
             jButtonComprarP1.setEnabled(false);
             jButtonCartaP1.setEnabled(false);
             jButtonCartaP1.setEnabled(false);
@@ -353,13 +375,17 @@ public class JogoBurro extends javax.swing.JFrame {
 
     private void jTextFieldMonteCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMonteCompraActionPerformed
     }//GEN-LAST:event_jTextFieldMonteCompraActionPerformed
-
+    /**
+     * Metodo responsavel por fazer o jogador 1 comprar uma carta da mesa
+     * @param evt
+     */
     private void jButtonComprarP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComprarP1ActionPerformed
         if (jogador1.comprarCarta(baralho)) {
             this.atualizaComboboxJogador1();
             this.atualizaMonteCompra();
         } else {
             JOptionPane.showMessageDialog(rootPane, jogo.verificaVencedor(jogador1, jogador2) + " Você Ganhou!");
+            jButtonComprarP2.setEnabled(false);
             jButtonComprarP1.setEnabled(false);
             jButtonCartaP1.setEnabled(false);
             jButtonCartaP1.setEnabled(false);
@@ -368,7 +394,10 @@ public class JogoBurro extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButtonComprarP1ActionPerformed
-
+    /**
+     * Metodo responsavem por fazer o jogador 1 jogar uma carta
+     * @param evt
+     */
     private void jButtonCartaP1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCartaP1ActionPerformed
         //carta a ser jogada pelo jogador 1
         String x = (String) jComboBoxP1.getSelectedItem();
@@ -378,7 +407,6 @@ public class JogoBurro extends javax.swing.JFrame {
         String x2 = (String) jTextFieldCartaNaMesaP2.getText();
         String arrayCarta2[] = x2.split(" ");
         Carta carta2 = new Carta(arrayCarta2[1], arrayCarta2[0]);
-
         if (jTextFieldCartaNaMesaP2.getText().equals("Carta P2")) {
             jTextFieldCartaNaMesaP1.setText(x);
             jogador1.jogarCarta(carta1);
@@ -405,6 +433,10 @@ public class JogoBurro extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCartaP1ActionPerformed
 
+    /**
+     * Metodo que inicia o jogo
+     * @param evt
+     */
     private void jButtonIniciarJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIniciarJogoActionPerformed
 
 

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jogodeburro;
 
 import java.util.ArrayList;
@@ -10,72 +6,116 @@ import pds.MonteDescarte;
 import pds.Baralho;
 
 /**
- *
+ * Classe que representa um jogador com suas principais funcionalidades
+ * 
  * @author Helison
  */
 public class Jogador extends Baralho {
 
-    private String nome;
-    private int numCartasMao = 0;
-    private int numCartasCompradas;
-    ArrayList<Carta> maoJogador = new ArrayList<>();
-    Carta carta;
+	private String nome;
+	private int numCartasMao = 0;
+	private int numCartasCompradas;
+	ArrayList<Carta> maoJogador = new ArrayList<>();
+	Carta carta;
 
-    public Jogador(Baralho baralho) {
+	/**
+	 * Construtor que inicia o jogador com suas 4 cartas na mão
+	 */
+	public Jogador(Baralho baralho) {
 
-        for (int i = 0; i <= 3; i++) {
-            carta = baralho.getPrimeiraCarta();
-            maoJogador.add(carta);
-        }
-        numCartasCompradas = 0;
-        numCartasMao = 4;
-    }
+		for (int i = 0; i <= 3; i++) {
+			carta = baralho.getPrimeiraCarta();
+			maoJogador.add(carta);
+		}
+		this.setNumCartasCompradas(0);
+		this.setNumCartasMao(4);
+	}
 
-    public boolean comprarCarta(Baralho baralho) {
-        if (baralho.getBaralhoCompleto().size() > 0) {
-            numCartasCompradas++;
-            numCartasMao++;
-            maoJogador.add(baralho.getPrimeiraCarta());
-            return true;
-        } else {
-            return false;
-        }
-    }
+	/**
+	 * @param baralho
+	 *            Metodo que compra uma carta do baralho e passa para a mão do
+	 *            jogador.
+	 * @return
+	 */
 
-    public boolean jogarCarta(Carta carta) {
-        numCartasMao--;
-        for (int i = 0; i < maoJogador.size(); i++) {
-            if ((maoJogador.get(i).getNumero().equals(carta.getNumero())) && (maoJogador.get(i).getnaipe().equals(carta.getnaipe()))) {
-                maoJogador.remove(i);
-                return true;
-            }
+	public boolean comprarCarta(Baralho baralho) {
+		if (baralho.getBaralhoCompleto().size() > 0) {
+			this.setNumCartasCompradas(getNumCartasCompradas() + 1);
+			this.setNumCartasMao(getNumCartasMao() + 1);
+			maoJogador.add(baralho.getPrimeiraCarta());
+			return true;
+		} else {
+			return false;
+		}
+	}
 
+	/**
+	 * @param carta
+	 *            Metodo que remove uma carta da mão do jogador
+	 * @return
+	 */
 
-        }
-        return false;
-    }
+	public boolean jogarCarta(Carta carta) {
+		this.setNumCartasMao(getNumCartasMao() - 1);
+		for (int i = 0; i < maoJogador.size(); i++) {
+			if ((maoJogador.get(i).getNumero().equals(carta.getNumero()))
+					&& (maoJogador.get(i).getnaipe().equals(carta.getnaipe()))) {
+				maoJogador.remove(i);
+				return true;
+			}
 
-    public String getNome() {
-        return nome;
-    }
+		}
+		return false;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	/**
+	 * Metodo que retorna o nome do jogaor
+	 * 
+	 * @return
+	 */
+	public String getNome() {
+		return nome;
+	}
 
-    public int getNumCartasMao() {
-        return numCartasMao;
-    }
+	/**
+	 * @param nome
+	 *            Metodo que define o nome do jogador
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setNumCartasMao(int numCartasMao) {
-        this.numCartasMao = numCartasMao;
-    }
+	/**
+	 * Metodo que retorna o numero de cartas na mao do jogador
+	 * 
+	 * @return
+	 */
+	public int getNumCartasMao() {
+		return numCartasMao;
+	}
 
-    public int getNumCartasCompradas() {
-        return numCartasCompradas;
-    }
+	/**
+	 * @param numCartasMao
+	 *            Metodo que define o numero de cartas que o jogador tem na mão.
+	 */
+	public void setNumCartasMao(int numCartasMao) {
+		this.numCartasMao = numCartasMao;
+	}
 
-    public void setNumCartasCompradas(int numCartasCompradas) {
-        this.numCartasCompradas = numCartasCompradas;
-    }
+	/**
+	 * Metodo que retorna o numero de cartas compradas do jogador
+	 * 
+	 * @return
+	 */
+	public int getNumCartasCompradas() {
+		return numCartasCompradas;
+	}
+
+	/**
+	 * @param numCartasCompradas
+	 *            Metodo que define o numero de cartas compradas do jogador
+	 */
+	public void setNumCartasCompradas(int numCartasCompradas) {
+		this.numCartasCompradas = numCartasCompradas;
+	}
 }
