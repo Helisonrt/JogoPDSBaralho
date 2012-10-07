@@ -46,14 +46,18 @@
         <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
     </variables>
     <packs>
-        <pack name="JogoDeBurro" preselected="yes" required="yes">
-            <description/>
-            <file override="update"
-                src="\build\JogodeBurro.jar" targetdir="$INSTALL_PATH/"/>
+        <pack name="Jogo de Burro" required="yes">
+            <description>Arquivos da aplicacao</description>
+            <file src="lib/libBaralho.jar" targetdir="$INSTALL_PATH/lib"/>
+            <file src="jogodeburro.jar" targetdir="$INSTALL_PATH"/>
+            <!-- parsable targetfile="$INSTALL_PATH/script.bat"/ -->
+            <!-- The file will be parsed -->
         </pack>
-        <pack name="API Cartas" preselected="yes" required="yes">
-            <description/>
+        <pack name="Biblioteca de Cartas" required="yes">
+            <description>Sources da biblioteca de cartas</description>
+            <file src="src" targetdir="$INSTALL_PATH"/>
         </pack>
+
     </packs>
     <native name="ShellLink.dll" type="izpack"/>
     <native name="ShellLink_x64.dll" type="izpack"/>

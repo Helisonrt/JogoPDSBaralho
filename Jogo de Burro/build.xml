@@ -1,39 +1,72 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project default="create_run_jar" name="Create Runnable Jar for Project JogoDeBurro">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="baralho" default="example" basedir=".">
+	<description>Constroi uma biblioteca de cartas e uma aplicação de exemplo.</description>
 
 
-	<property name="src.dir" value="src"/>
-	<property name="build.dir" value="build"/>
-	<property name="bin.dir" value="bin"/>
-	<property name ="lib.dir" value = "lib"/>
-	
-	<path id="classpath">
-		<fileset dir ="${src.dir}/lib" includes="**/*.jar"/>
+<!-- Define algumas variáveis que serão utilizadas -->
+	<property name="jogodeburro.src.dir" value="src/jogodeburro"/> <!-- Onde estão os fontes da aplicação -->
+	<property name="lib.src.dir" value="src/lib"/>  <!-- Onde estão os fontes da Lib -->
+	<property name="jogodeburro.build.dir" value="build/jogodeburro/classes"/> <!-- Onde será Compilada a Aplicação -->
+	<property name="lib.build.dir" value="build/lib/classes"/> <!-- Onde será compilada a Lib -->
+	<property name="lib.dir" value="lib/"/>  <!-- Onde será gerada a lib -->
+
+	<path id="classpath"> <!-- inclui a biblioteca criada no classpath -->
+        	<fileset dir="${lib.dir}" includes="**/*.jar"/>
 	</path>
 
+<!-- Alvo que cria os diretorios -->	
 	<target name="init">
-		<delete dir ="${build.dir}"/>
-		<delete dir ="${bin.dir}"/>
-		<mkdir dir="${build.dir}"/>
-		<mkdir dir="${bin.dir}"/>
+		<mkdir dir="${jogodeburro.build.dir}"/>
+		<mkdir dir="${lib.build.dir}"/>
+		<mkdir dir="${lib.dir}"/>
 	</target>
-	<target name="compile" depends="init" description="Compila os fontes">
-		<javac srcdir="${src.dir}" destdir="${bin.dir}" classpathref ="classpath">
-		<classpath>
-			<pathelement location="${bin.dir}" />
-		</classpath>
+	
+
+
+<!-- Compila as classes da biblioteca e salva os arquivos .class na pasta definida na variável lib.build.dir-->
+	<target name="compileLib" depends="init" description="Compila os fontes">
+		<javac srcdir="${lib.src.dir}" destdir="${lib.build.dir}">
+			<classpath>
+				<pathelement location="${lib.build.dir}" />
+			
+			</classpath>
 		</javac>
 	</target>
-	
-	
-    <target name="create_run_jar" depends="compile">
-        <jar destfile="${build.dir}/JogoDeBurro.jar">
-            <manifest>
-                <attribute name="Main-Class" value="jogodeburro.JogoBurro"/>
-                <attribute name="Class-Path" value="."/>
-            </manifest>
-            <fileset dir="${bin.dir}"/>
-         
-        </jar>
-    </target>
+
+<!-- Compila as classes da aplicação de exemplo e salva os arquivos .class na pasta definida na variável Truco.build.dir-->
+	<target name="compileExample" depends="geraLib" description="Compila o exemplo">
+		<javac srcdir="${jogodeburro.src.dir}" destdir="${jogodeburro.build.dir}" classpathref="classpath"> <!-- usa o classpath com a lib já cosntruida -->
+			<classpath>
+				<pathelement location="${jogodeburro.build.dir}" />
+                        
+			</classpath>
+		</javac>
+	</target>
+
+
+
+
+<!-- Alvo padrão, pra gerar um arquivo .jar-->
+
+	<target name="geraLib" depends="compileLib" description="Gera Biblioteca baralho">
+
+		<jar destfile="${lib.dir}/libBaralho.jar">
+       			<fileset dir="${lib.build.dir}"/>
+		</jar>
+	</target>	
+
+<!-- Constroi uma aplicação de exemplo. -->
+	<target name="example" depends="compileExample" description="Gera aplicação de exemplo.">
+
+		<jar destfile="jogodeburro.jar">
+                   <manifest>
+			<attribute name="Class-Path" value="lib/libBaralho.jar"/>
+                     	<attribute name="Main-Class" value="jogodeburro.JogoBurro" />
+			
+                   </manifest> 
+			<fileset dir="${jogodeburro.build.dir}"/>
+		</jar>
+	</target>	
+
 </project>

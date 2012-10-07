@@ -1,8 +1,6 @@
 package jogodeburro;
 
 import java.util.ArrayList;
-import pds.Carta;
-import pds.MonteDescarte;
 import lib.*;
 
 /**

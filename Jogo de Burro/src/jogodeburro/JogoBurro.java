@@ -7,7 +7,6 @@ package jogodeburro;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import pds.Baralho;
 import lib.*;
 
 /**
